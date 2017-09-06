@@ -8,7 +8,11 @@
 	</parent>
 	<artifactId>newsagent-dao</artifactId>
 	<packaging>jar</packaging>
-	
+
+	<properties>
+		
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>by.htp.newsagent</groupId>

@@ -4,10 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="news")
@@ -16,11 +22,28 @@ public class News {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	
+	@NotNull(message = "can not be empty")
+	@Temporal(TemporalType.DATE)
+	@Column(name="newsDate")
 	private Date newsDate;
+	
+	@NotNull(message = "can not be empty")
+	@Size(min = 5, max=100, message = "5-100 chars")
+	@Column(name="title")
 	private String title;
+	
+	@NotNull(message = "can not be empty")
+	@Size(min = 5, max=500, message = "5-500 chars")
+	@Column(name="brief")
 	private String brief;
+	
+	@NotNull(message = "can not be empty")
+	@Size(min = 5, max=1024, message = "5-1024 chars")
+	@Column(name="content")
 	private String content;
+	
+	@Column(name="status")
+	@Enumerated(EnumType.STRING)
 	private NewsStatus status;
 
 	public int getId() {

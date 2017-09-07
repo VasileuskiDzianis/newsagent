@@ -15,6 +15,20 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>by.htp.newsagent</groupId>
+			<artifactId>newsagent-domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>by.htp.newsagent</groupId>
+			<artifactId>newsagent-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		
 		<!-- Apache tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>

@@ -6,9 +6,12 @@ import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 
+@Transactional
 @Repository
 public class NewsDaoImpl implements NewsDao {
 	@Resource(name = "sessionFactory")
@@ -23,7 +26,7 @@ public class NewsDaoImpl implements NewsDao {
 	@Override
 	public List<News> findByStatus(NewsStatus stat) {
 
-		return sessionFactory.getCurrentSession().createQuery("from News u where status = :stat", News.class)
+		return sessionFactory.getCurrentSession().createQuery("from News u where status = :stat order by newsDate desc", News.class)
 				.setParameter("stat", stat).list();
 	}
 

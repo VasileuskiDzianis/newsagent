@@ -2,7 +2,7 @@
 	margin: 0px;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
-
+/* Header - start ---------------------------------*/
 #header-container {
 	background: #c4c4c4;
 	width: 100%;
@@ -25,7 +25,9 @@
 	bottom: 10px;
 	float: right;
 }
+/* Header - end ---------------------------------*/
 
+/* Menu - start ---------------------------------*/
 #menu-container {
 	background: #9c9999;
 	width: 12%;
@@ -62,6 +64,7 @@
 	padding: 3px;
 	text-align: right;
 }
+/* Menu - end ---------------------------------*/
 
 #body-container {
 	color: #373737;
@@ -78,6 +81,7 @@
 	padding-top: 10px;
 }
 
+/* Footer - start ---------------------------------*/
 #footer-container {
 	background: #c4c4c4;
 	width: 100%;
@@ -93,13 +97,16 @@
 	display: table-cell;
 	text-align: center;
 }
+/* Footer - end ---------------------------------*/
 
+/* News List - start ---------------------------------*/
 .news-item-container {
 	background: #dadada;
 	padding: 5px;
 	padding-left: 30px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	max-width: 1000px;
 }
 
 .news-item-title {
@@ -128,12 +135,44 @@
 }
 
 #submit-container {
-	text-align: right;
+	text-align: center;
+	max-width: 1000px;
 }
 
 .action-item {
 	vertical-align: middle;
 }
+/* News List - end ---------------------------------*/
+
+/* News details/add - start ---------------------------------*/
+#news-view-container, #news-add-container{
+	padding: 5px;
+	padding-left: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.details-item {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	
+}
+
+.details-title {
+	vertical-align: top;
+	width: 150px;
+	display: inline-block;
+	font-weight: bold;
+}
+	
+.details-content {
+	max-width: 800px;
+	text-align: justify;
+	display: inline-block;
+}
+
+/* News details - end ---------------------------------*/
+
+
 
 .button {
    border: 1px solid #454545;
@@ -156,11 +195,14 @@
    font-size: 14px;
    font-family: helvetica, serif;
    text-decoration: none;
+   font-weight: normal;
    vertical-align: middle;
    }
 .button:hover {
    border: 1px solid #474747;
    text-shadow: #545454 0 1px 0;
+   text-decoration: none;
+   font-weight: normal;
    background: #a3a3a3;
    background: -webkit-gradient(linear, left top, left bottom, from(#cccccc), to(#a3a3a3));
    background: -webkit-linear-gradient(top, #cccccc, #a3a3a3);
@@ -172,6 +214,8 @@
    }
 .button:active {
    text-shadow: #5e5e5e 0 1px 0;
+   text-decoration: none;
+   font-weight: normal;
    border: 1px solid #474747;
    background: #d6d6d6;
    background: -webkit-gradient(linear, left top, left bottom, from(#9c9c9c), to(#a3a3a3));

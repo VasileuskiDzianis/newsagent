@@ -43,4 +43,9 @@ public class NewsServiceImpl implements NewsService {
 			archiveOnePieceOfNews(newsItem);
 		}
 	}
+
+	@Override
+	public void saveNews(News news) {
+		newsDao.saveNews(news);
+	}
 }

@@ -13,12 +13,12 @@ LOCK TABLES news WRITE;
 
 INSERT INTO news VALUES
 	('1', '2017-09-01', 
-	'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m', 
+	'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.', 
 	
 	'The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, 
 Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. 
 Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, 
-it would be necessary to have uniform grammar, pronunciation and more common words.',
+it would be necessary to have uniform grammar.',
 
 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. 
 He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided 
@@ -33,7 +33,7 @@ How about if I sleep a little bit longer and forget all this nonsense", he thoug
 because he was used to sleeping on his right, and in his present state couldnt get into that position. However hard he threw 
 himself onto his right, he always rolled back to where he was. He must have tried it a hundred times, shut his eyes so that he 
 wouldnt have to look at the floundering legs, and only stopped when he began to feel a mild, dull pain there that he had never 
-felt before. "Oh, God", he thought, "what a strenuous career it is that Ive chosen!',
+felt before.',
 'ACTUAL');
 INSERT INTO news VALUES
 	('2', '2017-09-02', 

@@ -11,6 +11,8 @@ public interface NewsService {
 	
 	List<News> findByStatus(NewsStatus status);
 	
+	void saveNews(News news);
+	
 	void archiveOnePieceOfNews(News news);
 	
 	void archiveSeveralNews(List<News> news);

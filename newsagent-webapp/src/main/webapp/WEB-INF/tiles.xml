@@ -22,11 +22,6 @@
 		<put-attribute name="body" value="/WEB-INF/tiles/news_view.jsp" />
 	</definition>
 	
-	<definition name="news.add" extends="news.list">
-		<put-attribute name="title" value="Add News" />
-		<put-attribute name="body" value="/WEB-INF/tiles/news_add.jsp" />
-	</definition>
-	
 	<definition name="about" extends="news.list">
 		<put-attribute name="title" value="About" />
 		<put-attribute name="body" value="/WEB-INF/tiles/about.jsp" />

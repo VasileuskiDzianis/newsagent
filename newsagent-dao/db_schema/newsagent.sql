@@ -72,5 +72,7 @@ INSERT INTO news VALUES
 	('7', '2017-09-07', 'Short title 7', 'Short brief 7', 'Short content 7', 'ACTUAL');
 INSERT INTO news VALUES
 	('8', '2017-09-08', 'Short title 8', 'Short brief 8', 'Short content 8', 'ACTUAL');
+INSERT INTO news VALUES
+	('9', '2017-09-09', 'Белорусские новости 9', 'Минску 950 лет', 'Салют в 22:30', 'ACTUAL');
 
 UNLOCK TABLES;

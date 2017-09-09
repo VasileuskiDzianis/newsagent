@@ -26,12 +26,14 @@ import by.htp.newsagent.domain.news.NewsStatus;
 import by.htp.newsagent.model.Location;
 import by.htp.newsagent.model.LocationModel;
 import by.htp.newsagent.model.NewsItemModel;
+import by.htp.newsagent.service.PathValidator;
 import by.htp.newsagent.service.news.NewsService;
 
 @Controller
 @RequestMapping(value = "/news")
 public class NewsController {
 	private static final int GENUINE_NEWS_ID = 0;
+
 	private LocationModel locationModel = new LocationModel();
 
 	@Autowired
@@ -119,15 +121,14 @@ public class NewsController {
 	public String getNewsItem(Model model, @PathVariable String rawNewsId, Locale locale) {
 		int newsId = 0;
 
-		try {
+		if (PathValidator.isPathVariableValid(rawNewsId)) {
 			newsId = Integer.parseInt(rawNewsId);
-		} catch (NumberFormatException e) {
-			model.addAttribute("errorMessage", messageSource.getMessage("message.BadRequest400", null, locale));
-			
+		} else {
 			locationModel.setCurrentLocation(Location.ERROR);
 			locationModel.setPreviousLocation(Location.NEWS);
 
 			model.addAttribute("locationModel", locationModel);
+			model.addAttribute("errorMessage", messageSource.getMessage("message.BadRequest400", null, locale));
 
 			return "error";
 		}
@@ -154,9 +155,20 @@ public class NewsController {
 		}
 	}
 
-	@RequestMapping(path = "/{newsId}/edit", method = RequestMethod.GET)
-	public String editNewsItem(Model model, @PathVariable int newsId) {
-		News newsItem = newsService.findById(newsId);
+	@RequestMapping(path = "/{rawNewsId}/edit", method = RequestMethod.GET)
+	public String editNewsItem(Model model, @PathVariable String rawNewsId, Locale locale) {
+		
+		if (!PathValidator.isPathVariableValid(rawNewsId)) {
+			locationModel.setCurrentLocation(Location.ERROR);
+			locationModel.setPreviousLocation(Location.NEWS);
+
+			model.addAttribute("locationModel", locationModel);
+			model.addAttribute("errorMessage", messageSource.getMessage("message.BadRequest400", null, locale));
+
+			return "error";
+		}
+
+		News newsItem = newsService.findById(Integer.parseInt(rawNewsId));
 		NewsItemModel newsItemModel = new NewsItemModel();
 
 		if (newsItem != null) {
@@ -165,14 +177,12 @@ public class NewsController {
 			newsItemModel.setBrief(newsItem.getBrief());
 			newsItemModel.setNewsDate(newsItem.getNewsDate());
 			newsItemModel.setContent(newsItem.getContent());
-
+			
 			locationModel.setCurrentLocation(Location.NEWS_EDIT);
 		} else {
 			newsItemModel.setNewsDate(new Date());
-
 			locationModel.setCurrentLocation(Location.NEWS_ADD);
 		}
-
 		locationModel.setPreviousLocation(Location.NEWS);
 
 		model.addAttribute("locationModel", locationModel);

@@ -26,5 +26,10 @@
 		<put-attribute name="title" value="About" />
 		<put-attribute name="body" value="/WEB-INF/tiles/about.jsp" />
 	</definition>
+
+	<definition name="error" extends="news.list">
+		<put-attribute name="title" value="error" />
+		<put-attribute name="body" value="/WEB-INF/tiles/error.jsp" />
+	</definition>
 	
 </tiles-definitions>

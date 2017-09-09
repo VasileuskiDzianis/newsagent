@@ -154,6 +154,7 @@
 .details-item {
 	margin-top: 30px;
 	margin-bottom: 30px;
+	vertical-align: top;
 	
 }
 
@@ -170,9 +171,22 @@
 	display: inline-block;
 }
 
+.form-error-label {
+	vertical-align: top;
+	color: red;
+	display: inline-block;
+}
+
 /* News details - end ---------------------------------*/
 
+#location-container {
+	margin-bottom: 20px;
+}
 
+
+#banch-deletion-button {
+	visibility: hidden;
+}
 
 .button {
    border: 1px solid #454545;

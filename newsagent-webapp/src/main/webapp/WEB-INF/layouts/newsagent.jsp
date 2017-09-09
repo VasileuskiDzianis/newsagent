@@ -20,6 +20,7 @@
   		
   </script>
 	<script src="<c:url value="/resources/confirm_deletion.js"/>"></script>
+	<script src="<c:url value="/resources/checkboxes_checker.js"/>"></script>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />

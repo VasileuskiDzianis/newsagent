@@ -6,8 +6,6 @@
 
 <div id="news-list-container">
 
-	<form action="<c:url value="/news"/>" method="post">
-	<input type="hidden" name="_method" value="delete" />
 	<c:forEach var="newsItem" items="${newsList}">
 		<div class="news-item-container">
 			<div class="news-item-date"><fmt:formatDate value="${newsItem.newsDate}" pattern="dd/MM/yyyy"/></div>
@@ -16,12 +14,23 @@
 			<div class="news-item-actions">
 				<a class="action-item" href="<c:url value="/news/${newsItem.id}"/>"><spring:message code="link.viewNewsItem" /></a> 
 				<a class="action-item" href="<c:url value="/news/${newsItem.id}/edit"/>"><spring:message code="link.editNewsItem" /></a> 
-				<input type="checkbox" class="action-item" name="selectedNewsItems" value="${newsItem.id}" />
+				<input form="prompt-form" type="checkbox" class="action-item" name="selectedNewsItems" value="${newsItem.id}" onchange="checkCheckboxes()"/>
 			</div>
 		</div>
 	</c:forEach>
+	
 	<div id="submit-container">
-		<input type="submit" value="<spring:message code="label.deleteButton" />" class="button" />
+		<input type="button" id="banch-deletion-button" value="<spring:message code="label.deleteButton" />" class="button" 
+			onclick="confirmDeletion('0','<spring:message code="message.confirmBanchOfNewsDeletion" />')" />
 	</div>
-	</form>
+	
+	<div id="prompt-form-container">
+    <form id="prompt-form" action="<c:url value="/news" />" method="post">
+    <input type="hidden" name="_method" value="delete" />
+      <div id="prompt-message"></div>
+      <input type="submit" value="<spring:message code="label.okButton" />">
+      <input type="button" name="cancel" value="<spring:message code="label.cancelButton" />">
+    </form>
+	</div>
+	
 </div>

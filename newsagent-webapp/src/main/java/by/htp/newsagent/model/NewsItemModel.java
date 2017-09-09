@@ -15,6 +15,7 @@ public class NewsItemModel {
 	private Date newsDate;
 
 	@Size(min = 5, max = 100, message = "5-100 chars")
+	@NotNull(message = "can not be empty")
 	private String title;
 
 	@NotNull(message = "can not be empty")

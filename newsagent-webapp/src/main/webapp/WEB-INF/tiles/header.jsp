@@ -5,7 +5,7 @@
 <div id="header-container">
 	<div id="header-content"><h2><spring:message code="label.header"/></h2></div>
 	<div id="header-locale">
-		<a href="<c:url value="/about?lang=en"/>"><spring:message code="link.localeEn"/></a> 
-		<a href="<c:url value="/about?lang=ru"/>"><spring:message code="link.localeRu"/></a>
+		<a href="<c:url value="?lang=en"/>"><spring:message code="link.localeEn"/></a> 
+		<a href="<c:url value="?lang=ru"/>"><spring:message code="link.localeRu"/></a>
 	</div>
 </div>

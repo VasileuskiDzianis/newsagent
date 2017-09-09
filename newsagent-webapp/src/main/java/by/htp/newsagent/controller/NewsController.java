@@ -3,11 +3,18 @@ package by.htp.newsagent.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,21 +23,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
+import by.htp.newsagent.model.Location;
+import by.htp.newsagent.model.LocationModel;
 import by.htp.newsagent.model.NewsItemModel;
 import by.htp.newsagent.service.news.NewsService;
 
 @Controller
-@RequestMapping(value="/news")
+@RequestMapping(value = "/news")
 public class NewsController {
-	
+	private static final int GENUINE_NEWS_ID = 0;
+	private LocationModel locationModel = new LocationModel();
+
+	@Autowired
+	private MessageSource messageSource;
+
 	@Autowired
 	private NewsService newsService;
-	
+
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String getNewsList(Model model) {
 		List<News> newsList = newsService.findByStatus(NewsStatus.ACTUAL);
 		List<NewsItemModel> newsModelList = new ArrayList<>();
-		
+
 		for (News newsItem : newsList) {
 			NewsItemModel newsItemModel = new NewsItemModel();
 			newsItemModel.setId(newsItem.getId());
@@ -40,27 +60,48 @@ public class NewsController {
 			newsItemModel.setContent(newsItem.getContent());
 			newsModelList.add(newsItemModel);
 		}
+		locationModel.setCurrentLocation(Location.NEWS_LIST);
+		locationModel.setPreviousLocation(Location.NEWS);
+
+		model.addAttribute("locationModel", locationModel);
 		model.addAttribute("newsList", newsModelList);
-		
+
 		return "news.list";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE)
-	public String deleteNews(Model model, @RequestParam(name="selectedNewsItems", required=false) int[] newsForDeletionIds) {
+	public String deleteNews(Model model,
+			@RequestParam(name = "selectedNewsItems", required = false) int[] newsForDeletionIds) {
 		if (newsForDeletionIds != null) {
 			List<News> newsForDeletion = new ArrayList<>();
 			for (int id : newsForDeletionIds) {
-				newsForDeletion.add(newsService.findById(id));
+				if (id != GENUINE_NEWS_ID) {
+					newsForDeletion.add(newsService.findById(id));
+				}
 			}
-			
 			newsService.archiveSeveralNews(newsForDeletion);
 		}
 		return "redirect:/news";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveNews(Model model, @ModelAttribute("newsItemModel")  NewsItemModel newsItemModel, BindingResult bindingResult) {
-		
+	public String saveNews(Model model, @Valid @ModelAttribute("newsItemModel") NewsItemModel newsItemModel,
+			BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+
+			if (newsItemModel.getId() > GENUINE_NEWS_ID) {
+				locationModel.setCurrentLocation(Location.NEWS_EDIT);
+			} else {
+				locationModel.setCurrentLocation(Location.NEWS_ADD);
+			}
+
+			locationModel.setPreviousLocation(Location.NEWS);
+			model.addAttribute("locationModel", locationModel);
+
+			return "news.add";
+		}
+
 		News newsItem = new News();
 		newsItem.setId(newsItemModel.getId());
 		newsItem.setTitle(newsItemModel.getTitle());
@@ -68,46 +109,75 @@ public class NewsController {
 		newsItem.setBrief(newsItemModel.getBrief());
 		newsItem.setContent(newsItemModel.getContent());
 		newsItem.setStatus(NewsStatus.ACTUAL);
-		
+
 		newsService.saveNews(newsItem);
-		
+
 		return "redirect:/news";
 	}
-	
-	@RequestMapping(path = "/{newsId}", method = RequestMethod.GET)
-	public String getNewsItem(Model model, @PathVariable int newsId) {
+
+	@RequestMapping(path = "/{rawNewsId}", method = RequestMethod.GET)
+	public String getNewsItem(Model model, @PathVariable String rawNewsId, Locale locale) {
+		int newsId = 0;
+
+		try {
+			newsId = Integer.parseInt(rawNewsId);
+		} catch (NumberFormatException e) {
+			model.addAttribute("errorMessage", messageSource.getMessage("message.BadRequest400", null, locale));
+			
+			locationModel.setCurrentLocation(Location.ERROR);
+			locationModel.setPreviousLocation(Location.NEWS);
+
+			model.addAttribute("locationModel", locationModel);
+
+			return "error";
+		}
+
 		News newsItem = newsService.findById(newsId);
-		NewsItemModel newsItemModel = new NewsItemModel();
-		
-		newsItemModel.setId(newsItem.getId());
-		newsItemModel.setTitle(newsItem.getTitle());
-		newsItemModel.setBrief(newsItem.getBrief());
-		newsItemModel.setNewsDate(newsItem.getNewsDate());
-		newsItemModel.setContent(newsItem.getContent());
-		
-		model.addAttribute("newsItemModel", newsItemModel);
-		
-		return "news.view";
+		if (newsItem != null) {
+			NewsItemModel newsItemModel = new NewsItemModel();
+			newsItemModel.setId(newsItem.getId());
+			newsItemModel.setTitle(newsItem.getTitle());
+			newsItemModel.setBrief(newsItem.getBrief());
+			newsItemModel.setNewsDate(newsItem.getNewsDate());
+			newsItemModel.setContent(newsItem.getContent());
+
+			locationModel.setCurrentLocation(Location.NEWS_VIEW);
+			locationModel.setPreviousLocation(Location.NEWS);
+
+			model.addAttribute("locationModel", locationModel);
+			model.addAttribute("newsItemModel", newsItemModel);
+
+			return "news.view";
+		} else {
+
+			return "redirect:/news";
+		}
 	}
-	
+
 	@RequestMapping(path = "/{newsId}/edit", method = RequestMethod.GET)
 	public String editNewsItem(Model model, @PathVariable int newsId) {
-		
-		NewsItemModel newsItemModel = new NewsItemModel();
-		
-		if (newsId > 0) { 
 		News newsItem = newsService.findById(newsId);
-		newsItemModel.setId(newsItem.getId());
-		newsItemModel.setTitle(newsItem.getTitle());
-		newsItemModel.setBrief(newsItem.getBrief());
-		newsItemModel.setNewsDate(newsItem.getNewsDate());
-		newsItemModel.setContent(newsItem.getContent());
+		NewsItemModel newsItemModel = new NewsItemModel();
+
+		if (newsItem != null) {
+			newsItemModel.setId(newsItem.getId());
+			newsItemModel.setTitle(newsItem.getTitle());
+			newsItemModel.setBrief(newsItem.getBrief());
+			newsItemModel.setNewsDate(newsItem.getNewsDate());
+			newsItemModel.setContent(newsItem.getContent());
+
+			locationModel.setCurrentLocation(Location.NEWS_EDIT);
 		} else {
 			newsItemModel.setNewsDate(new Date());
+
+			locationModel.setCurrentLocation(Location.NEWS_ADD);
 		}
-		
+
+		locationModel.setPreviousLocation(Location.NEWS);
+
+		model.addAttribute("locationModel", locationModel);
 		model.addAttribute("newsItemModel", newsItemModel);
-		
+
 		return "news.add";
 	}
 }

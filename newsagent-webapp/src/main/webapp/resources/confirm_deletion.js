@@ -52,7 +52,9 @@ function showPrompt(text) {
 }
 
 function confirmDeletion(newsId, message) {
-	var hiddenField = document.getElementById("deleting_news");
-	hiddenField.setAttribute("value", newsId);
+	if (newsId != 0) {
+		var hiddenField = document.getElementById("deleting_news");
+		hiddenField.setAttribute("value", newsId);
+	}
 	showPrompt(message);
 }

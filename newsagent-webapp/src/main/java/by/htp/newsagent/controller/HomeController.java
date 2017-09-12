@@ -10,10 +10,10 @@ import by.htp.newsagent.model.LocationModel;
 
 @Controller
 public class HomeController {
-	private LocationModel locationModel = new LocationModel();
 	
 	@RequestMapping(value = {"/","/about"}, method = RequestMethod.GET)
 	public String home(Model model) {
+		LocationModel locationModel = new LocationModel();
 		locationModel.setCurrentLocation(Location.ABOUT);
 		locationModel.setPreviousLocation(Location.NEWS);
 		

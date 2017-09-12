@@ -18,13 +18,14 @@ import by.htp.newsagent.model.LocationModel;
 @ControllerAdvice
 public class ExceptionHandlerController {
 	private static final Logger LOGGER = LogManager.getLogger(ExceptionHandlerController.class);
-	private LocationModel locationModel = new LocationModel();
 	
 	@Autowired
 	private MessageSource messageSource;
 
 	@ExceptionHandler
 	public String handle(Exception e, Model model, Locale locale) {
+		LocationModel locationModel = new LocationModel();
+		
 		LOGGER.error("Exception occurred, ", e);
 		e.printStackTrace();
 		

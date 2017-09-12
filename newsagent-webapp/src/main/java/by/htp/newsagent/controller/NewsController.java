@@ -34,8 +34,6 @@ import by.htp.newsagent.service.news.NewsService;
 public class NewsController {
 	private static final int GENUINE_NEWS_ID = 0;
 
-	private LocationModel locationModel = new LocationModel();
-
 	@Autowired
 	private MessageSource messageSource;
 
@@ -50,6 +48,7 @@ public class NewsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getNewsList(Model model) {
+		LocationModel locationModel = new LocationModel();
 		List<News> newsList = newsService.findByStatus(NewsStatus.ACTUAL);
 		List<NewsItemModel> newsModelList = new ArrayList<>();
 
@@ -89,6 +88,7 @@ public class NewsController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveNews(Model model, @Valid @ModelAttribute("newsItemModel") NewsItemModel newsItemModel,
 			BindingResult bindingResult) {
+		LocationModel locationModel = new LocationModel();
 
 		if (bindingResult.hasErrors()) {
 
@@ -119,6 +119,7 @@ public class NewsController {
 
 	@RequestMapping(path = "/{rawNewsId}", method = RequestMethod.GET)
 	public String getNewsItem(Model model, @PathVariable String rawNewsId, Locale locale) {
+		LocationModel locationModel = new LocationModel();
 		int newsId = 0;
 
 		if (PathValidator.isPathVariableValid(rawNewsId)) {
@@ -157,6 +158,7 @@ public class NewsController {
 
 	@RequestMapping(path = "/{rawNewsId}/edit", method = RequestMethod.GET)
 	public String editNewsItem(Model model, @PathVariable String rawNewsId, Locale locale) {
+		LocationModel locationModel = new LocationModel();
 		
 		if (!PathValidator.isPathVariableValid(rawNewsId)) {
 			locationModel.setCurrentLocation(Location.ERROR);

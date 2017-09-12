@@ -49,7 +49,6 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 
 	@Test
 	public void findByIdTest(){
-		
 		News expectedNews = new News();
 		expectedNews.setId(EXPECTED_NEWS_ID);
 		expectedNews.setNewsDate(expectedNewsDate);
@@ -71,11 +70,9 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 		for (News news : storedNews) {
 			storedNewsIds.add(news.getId());
 		}
-
 		for (Integer actualId : ACTUAL_NEWS_IDS) {
 			assertTrue(storedNewsIds.contains(actualId));
 		}
-
 		assertFalse(storedNewsIds.contains(ARCHIVED_NEWS_ID));
 	}
 

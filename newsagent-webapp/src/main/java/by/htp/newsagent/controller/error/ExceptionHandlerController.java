@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import by.htp.newsagent.model.Location;
 import by.htp.newsagent.model.LocationModel;
+import by.htp.newsagent.service.exception.NewsValidationException;
 
 
 
@@ -23,7 +24,7 @@ public class ExceptionHandlerController {
 	private MessageSource messageSource;
 
 	@ExceptionHandler
-	public String handle(Exception e, Model model, Locale locale) {
+	public String handleGlobalExceptions(Exception e, Model model, Locale locale) {
 		LocationModel locationModel = new LocationModel();
 		
 		LOGGER.error("Exception occurred, ", e);
@@ -35,6 +36,22 @@ public class ExceptionHandlerController {
 		model.addAttribute("locationModel", locationModel);
 		model.addAttribute("errorMessage", messageSource.getMessage("message.internalError", null, locale));
 
+		return "error";
+	}
+	
+	@ExceptionHandler
+	public String handleValidationExceptions(NewsValidationException e, Model model, Locale locale) {
+		LocationModel locationModel = new LocationModel();
+		
+		LOGGER.error("NewsValidation Exception occurred, ", e);
+		e.printStackTrace();
+		
+		locationModel.setCurrentLocation(Location.ERROR);
+		locationModel.setPreviousLocation(Location.NEWS);
+		
+		model.addAttribute("locationModel", locationModel);
+		model.addAttribute("errorMessage", messageSource.getMessage("message.illegalNewsArgument", null, locale));
+		
 		return "error";
 	}
 }

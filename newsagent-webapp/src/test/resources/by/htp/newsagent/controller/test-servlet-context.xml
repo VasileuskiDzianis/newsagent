@@ -53,5 +53,21 @@
 		</beans:bean>
 	</interceptors>
 
-	<context:component-scan base-package="by.htp.newsagent.controller" />
+	<!-- News validation properties -->
+	<beans:bean id="newsValidator"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<beans:property name="locations">
+			<beans:array>
+				<beans:value>classpath:news_validator.properties</beans:value>
+			</beans:array>
+		</beans:property>
+	</beans:bean>
+	<context:property-placeholder
+		properties-ref="newsValidator" />
+
+	<context:component-scan base-package="by.htp.newsagent" />
+
+	<!-- Database connection beans -->
+	<beans:import resource="database.xml" />
+
 </beans:beans>

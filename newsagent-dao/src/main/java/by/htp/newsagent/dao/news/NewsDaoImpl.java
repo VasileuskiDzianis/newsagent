@@ -26,7 +26,8 @@ public class NewsDaoImpl implements NewsDao {
 	@Override
 	public List<News> findByStatus(NewsStatus stat) {
 
-		return sessionFactory.getCurrentSession().createQuery("from News u where status = :stat order by newsDate desc", News.class)
+		return sessionFactory.getCurrentSession()
+				.createQuery("from News u where status = :stat order by newsDate desc", News.class)
 				.setParameter("stat", stat).list();
 	}
 

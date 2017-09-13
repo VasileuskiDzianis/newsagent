@@ -1,5 +1,7 @@
 package by.htp.newsagent.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,7 @@ import by.htp.newsagent.model.LocationModel;
 public class HomeController {
 	
 	@RequestMapping(value = {"/","/about"}, method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, HttpServletRequest request) {
 		LocationModel locationModel = new LocationModel();
 		locationModel.setCurrentLocation(Location.ABOUT);
 		locationModel.setPreviousLocation(Location.NEWS);

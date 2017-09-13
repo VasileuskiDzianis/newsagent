@@ -64,6 +64,13 @@
 	</beans:bean>
 	<context:property-placeholder
 		properties-ref="newsValidator" />
+		
+		<!-- Validation -->
+	<beans:bean id="stringTrimmerEditor" class="org.springframework.beans.propertyeditors.StringTrimmerEditor">
+		<beans:constructor-arg>
+			<beans:value>true</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
 
 	<context:component-scan base-package="by.htp.newsagent" />
 

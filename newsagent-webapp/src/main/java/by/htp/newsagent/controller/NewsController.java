@@ -39,10 +39,12 @@ public class NewsController {
 
 	@Autowired
 	private NewsService newsService;
-
+	
+	@Autowired
+	StringTrimmerEditor stringTrimmerEditor;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
-		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 

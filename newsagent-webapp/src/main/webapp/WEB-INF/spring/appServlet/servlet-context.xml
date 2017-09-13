@@ -52,6 +52,13 @@
 			<beans:property name="paramName" value="lang" />
 		</beans:bean>
 	</interceptors>
+	
+	<!-- Validation -->
+	<beans:bean id="stringTrimmerEditor" class="org.springframework.beans.propertyeditors.StringTrimmerEditor">
+		<beans:constructor-arg>
+			<beans:value>true</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
 
 	<context:component-scan base-package="by.htp.newsagent.controller" />
 </beans:beans>

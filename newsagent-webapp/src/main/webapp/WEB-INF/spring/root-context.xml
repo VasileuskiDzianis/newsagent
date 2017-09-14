@@ -3,63 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:util="http://www.springframework.org/schema/util" 
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
-	<context:component-scan base-package="by.htp.newsagent.service, by.htp.newsagent.dao" />
-	<tx:annotation-driven />
-
-	<!-- Data source -->
-
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<!--Local DB: comment next before commit to GitHub -->
-		<beans:property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/newsagent" />
-		<!--OpenShift uncomment next before commit to GitHub -->
-		<!-- <beans:property name="url" value="jdbc:mysql://172.30.172.137:3306/spring_tags" 
-			/> -->
-		<beans:property name="username" value="newsagent" />
-		<beans:property name="password" value="qwerty" />
-		<beans:property name="connectionProperties"
-			value="useUnicode=true;characterEncoding=utf8;" />
-
-	</beans:bean>
-
-	<beans:bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="by.htp.newsagent" />
-		<beans:property name="hibernateProperties" ref="hibernateProperties" />
-	</beans:bean>
-
-	<util:properties id="hibernateProperties">
-		<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-		</beans:prop>
-		<beans:prop key="hibernate.max_fetch_depth">3</beans:prop>
-		<beans:prop key="hibernate.jdbc.fetch_size">50</beans:prop>
-		<beans:prop key="hibernate.jdbc.batch_size">10</beans:prop>
-		<beans:prop key="hibernate.show_sql">true</beans:prop>
-	</util:properties>
-
-	<beans:bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<beans:property name="sessionFactory" ref="sessionFactory" />
-	</beans:bean>
-
-	<!-- News validation properties -->
-	<beans:bean id="newsValidator"
-		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<beans:property name="locations">
-			<beans:array>
-				<beans:value>classpath:news_validator.properties</beans:value>
-			</beans:array>
-		</beans:property>
-	</beans:bean>
-	<context:property-placeholder properties-ref="newsValidator" />
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 </beans:beans>

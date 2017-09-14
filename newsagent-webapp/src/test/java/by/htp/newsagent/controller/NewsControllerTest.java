@@ -77,6 +77,7 @@ public class NewsControllerTest {
 		@Bean
 		@Primary
 		public NewsService newsServiceMock() {
+			
 			return Mockito.mock(NewsService.class);
 		}
 	}
@@ -169,11 +170,6 @@ public class NewsControllerTest {
 		this.mockMvc.perform(delete("/news").param("selectedNewsItems", "66", "88"))
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("/news"));
-		
-		//next two methods call exception: org.mockito.exceptions.misusing.UnfinishedVerificationException:  
-		//Missing method call for verify(mock) here: -> at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method
-		//verify(newsService).archiveSeveralNews(any());
-		//verify(newsService, times(2)).findById(anyInt());
 	}
 
 	@Test
@@ -188,7 +184,7 @@ public class NewsControllerTest {
 		.andExpect(redirectedUrl("/news"));
 	}
 	
-	//BindingResult doesn't have errors with hibernate-validator 5.4.1.Final
+	//BindingResult doesn't find errors in any cases with hibernate-validator 5.4.1.Final
 	//particularly works with hibernate-validator 4.1.0.Final and javax.validation validation-api 1.0.0.GA
 	@Ignore 
 	@Test

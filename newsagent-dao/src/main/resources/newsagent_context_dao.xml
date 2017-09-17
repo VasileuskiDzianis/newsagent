@@ -18,11 +18,10 @@
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 		<!--Local DB: comment next before commit to GitHub -->
-		<beans:property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/newsagent" />
+		<!-- <beans:property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/newsagent" /> -->
 		<!--OpenShift uncomment next before commit to GitHub -->
-		<!-- <beans:property name="url" value="jdbc:mysql://172.30.172.137:3306/spring_tags" 
-			/> -->
+		<beans:property name="url" value="jdbc:mysql://172.30.139.38:3306/newsagent"/>
 		<beans:property name="username" value="newsagent" />
 		<beans:property name="password" value="qwerty" />
 		<beans:property name="connectionProperties"

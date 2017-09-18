@@ -11,12 +11,16 @@ import by.htp.newsagent.domain.news.NewsStatus;
 public interface NewsService {
 	@Transactional(readOnly = true)
 	News findById(int id);
+
 	@Transactional(readOnly = true)
 	List<News> findByStatus(NewsStatus status);
+
 	@Transactional
 	void saveNews(News news);
+
 	@Transactional
 	void archiveOnePieceOfNews(News news);
+
 	@Transactional
 	void archiveSeveralNews(List<News> news);
 }

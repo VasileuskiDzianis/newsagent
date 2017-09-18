@@ -13,7 +13,7 @@ import by.htp.newsagent.model.LocationModel;
 @Controller
 public class HomeController {
 	
-	@RequestMapping(value = {"/","/about"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/about","/home"}, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 		LocationModel locationModel = new LocationModel();
 		locationModel.setCurrentLocation(Location.ABOUT);

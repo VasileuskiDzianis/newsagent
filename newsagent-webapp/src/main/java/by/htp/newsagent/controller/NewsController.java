@@ -135,7 +135,6 @@ public class NewsController {
 
 			return "error";
 		}
-
 		News newsItem = newsService.findById(newsId);
 		if (newsItem != null) {
 			NewsItemModel newsItemModel = new NewsItemModel();

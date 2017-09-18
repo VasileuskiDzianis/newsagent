@@ -16,7 +16,7 @@ import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 
 @RunWith(value = Parameterized.class)
-public class NewsValidatorServiceImplTest extends NewsValidatorServiceImpl {
+public class NewsValidatorServiceImplTest {
 	private static final int TITLE_MAX_LENGTH = 100;
 	private static final int TITLE_MIN_LENGTH = 5;
 	private static final int BRIEF_MAX_LENGTH = 500;

@@ -38,7 +38,6 @@ public class NewsDaoImpl implements NewsDao {
 
 	@Override
 	public void deleteNews(News news) {
-
 		sessionFactory.getCurrentSession().delete(news);
 	}
 }

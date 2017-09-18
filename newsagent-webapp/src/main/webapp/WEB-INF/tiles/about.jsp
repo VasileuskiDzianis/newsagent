@@ -1,7 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page session ="false" %>
 <div id="about-container">
 	<h1>About</h1>
+	<h2>Used technologies:</h2>
+		<ul>
+			<li>Java</li>
+			<li>Spring (core, mvc, aop)</li>
+			<li>Hibernate, MySQL</li>
+			<li>JUnit, Mockito</li>
+			<li>Log4j</li>
+			<li>Apache tiles</li>
+			<li>JSP, JSTL</li>
+			<li>JavaScript, JQuery, HTML, CSS</li>
+		</ul>
+	<h2>Next pointless text is just for place filling</h2>
 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
 		commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
 		et magnis dis parturient montes, nascetur ridiculus mus. Donec quam

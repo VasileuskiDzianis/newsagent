@@ -31,7 +31,7 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 	private static final String GIVEN_NEWS_BRIEF = "Short brief 9";
 	private static final String GIVEN_NEWS_CONTENT = "Short content 9";
 	private static final NewsStatus GIVEN_NEWS_STATUS = NewsStatus.ACTUAL;
-	
+
 	private static final int ILLEGAL_ID = 0;
 
 	private Date expectedNewsDate;
@@ -48,7 +48,7 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 	}
 
 	@Test
-	public void findByIdTest(){
+	public void findByIdTest() {
 		News expectedNews = new News();
 		expectedNews.setId(EXPECTED_NEWS_ID);
 		expectedNews.setNewsDate(expectedNewsDate);
@@ -84,30 +84,30 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 		givenNews.setContent(GIVEN_NEWS_CONTENT);
 		givenNews.setNewsDate(expectedNewsDate);
 		givenNews.setStatus(GIVEN_NEWS_STATUS);
-		
+
 		newsDao.saveNews(givenNews);
-		
+
 		int storedNewsId = givenNews.getId();
-		
+
 		assertTrue("id must be greater than 0: ", storedNewsId > ILLEGAL_ID);
-		
+
 		News storedNews = newsDao.findById(storedNewsId);
-		
-		assertTrue("given and stored users must be equals: ", givenNews.equals(storedNews));
-		
+
+		assertTrue("given and stored news must be equals: ", givenNews.equals(storedNews));
+
 		givenNews.setTitle(GIVEN_CHANGED_NEWS_TITLE);
-		
+
 		newsDao.saveNews(givenNews);
-		
+
 		storedNews = newsDao.findById(storedNewsId);
-		
+
 		assertEquals(GIVEN_CHANGED_NEWS_TITLE, storedNews.getTitle());
-		
+
 		newsDao.deleteNews(storedNews);
-		
+
 		assertNull(newsDao.findById(storedNewsId));
 	}
-	
+
 	@After
 	public void closeContext() {
 		context.close();

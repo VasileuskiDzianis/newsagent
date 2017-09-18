@@ -14,11 +14,10 @@ import org.springframework.stereotype.Component;
 public class RequestLoggingAspect {
 	
 	@Before("execution(* by.htp.newsagent.controller.*.*(org.springframework.ui.Model, ..))")
-	public void logRequest(JoinPoint joinPoint) {
+	public void logHttpRequest(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
 		for (Object argument : args) {
 			if (argument instanceof HttpServletRequest) {
-				
 				HttpServletRequest request = (HttpServletRequest) argument;
 				System.out.println(new Date()+ " | url: " + request.getRequestURI() + " | method: " + request.getMethod());
 			}

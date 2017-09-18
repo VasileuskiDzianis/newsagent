@@ -2,6 +2,11 @@
 	margin: 0px;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
+p {
+	max-width: 800px;
+	text-align: justify;
+}
+
 /* Header - start ---------------------------------*/
 #header-container {
 	background: #c4c4c4;

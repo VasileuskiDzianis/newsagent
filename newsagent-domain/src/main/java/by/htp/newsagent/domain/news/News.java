@@ -1,5 +1,6 @@
 package by.htp.newsagent.domain.news;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,26 +15,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="news")
-public class News {
+@Table(name = "news")
+public class News implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="newsDate")
+	@Column(name = "newsDate")
 	private Date newsDate;
-	
-	@Column(name="title")
+
+	@Column(name = "title")
 	private String title;
-	
-	@Column(name="brief")
+
+	@Column(name = "brief")
 	private String brief;
-	
-	@Column(name="content")
+
+	@Column(name = "content")
 	private String content;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private NewsStatus status;
 
@@ -100,37 +103,50 @@ public class News {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		News other = (News) obj;
 		if (brief == null) {
-			if (other.brief != null)
+			if (other.brief != null) {
 				return false;
-		} else if (!brief.equals(other.brief))
+			}
+		} else if (!brief.equals(other.brief)) {
 			return false;
+		}
 		if (content == null) {
-			if (other.content != null)
+			if (other.content != null) {
 				return false;
-		} else if (!content.equals(other.content))
+			}
+		} else if (!content.equals(other.content)) {
 			return false;
-		if (id != other.id)
+		}
+		if (id != other.id) {
 			return false;
+		}
 		if (newsDate == null) {
-			if (other.newsDate != null)
+			if (other.newsDate != null) {
 				return false;
-		} else if (!newsDate.equals(other.newsDate))
+			}
+		} else if (!newsDate.equals(other.newsDate)) {
 			return false;
-		if (status != other.status)
+		}
+		if (status != other.status) {
 			return false;
+		}
 		if (title == null) {
-			if (other.title != null)
+			if (other.title != null) {
 				return false;
-		} else if (!title.equals(other.title))
+			}
+		} else if (!title.equals(other.title)) {
 			return false;
+		}
 		return true;
 	}
 

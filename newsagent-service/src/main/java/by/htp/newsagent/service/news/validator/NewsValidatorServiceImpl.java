@@ -1,5 +1,7 @@
 package by.htp.newsagent.service.news.validator;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -7,24 +9,26 @@ import by.htp.newsagent.domain.news.News;
 
 @Service
 public class NewsValidatorServiceImpl implements NewsValidatorService {
-
-	@Value("#{newsValidator['titleMinLength'] ?: 5}")
+	@Value("#{${titleMinLength} ?: 5}")
 	private int titleMinLength;
 	
-	@Value("#{newsValidator['titleMaxLength'] ?: 100}")
+	@Value("#{${titleMaxLength} ?: 100}")
 	private int titleMaxLength;
 	
-	@Value("#{newsValidator['briefMinLength'] ?: 5}")
+	@Value("#{${briefMinLength} ?: 5}")
 	private int briefMinLength;
 	
-	@Value("#{newsValidator['briefMaxLength'] ?: 500}")
+	@Value("#{${briefMaxLength} ?: 500}")
 	private int briefMaxLength;
 	
-	@Value("#{newsValidator['contentMinLength'] ?: 5}")
+	@Value("#{${contentMinLength} ?: 5}")
 	private int contentMinLength;
 	
-	@Value("#{newsValidator['contentMaxLength'] ?: 2048}")
+	@Value("#{${contentMaxLength} ?: 2048}")
 	private int contentMaxLength;
+	
+	@Value("#{new java.text.SimpleDateFormat(\"yyyy-MM-dd\").parse(\"${maxNewsDate}\") ?: new java.text.SimpleDateFormat(\"yyyy-MM-dd\").parse('2200-01-01')}")
+	private Date maxNewsDate;
 
 	@Override
 	public boolean isNewsValid(News news) {
@@ -52,7 +56,11 @@ public class NewsValidatorServiceImpl implements NewsValidatorService {
 
 			return false;
 		}
-
+		
+		if (news.getNewsDate().after(maxNewsDate)) {
+			
+			return false;
+		}
 		return true;
 	}
 

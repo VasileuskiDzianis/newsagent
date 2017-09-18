@@ -4,8 +4,7 @@ import org.junit.Test;
 
 public class NewsServiceImplTest extends NewsServiceImpl {
 	NewsService newsService = new NewsServiceImpl();
-	
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindByStatus() {
 		newsService.findByStatus(null);

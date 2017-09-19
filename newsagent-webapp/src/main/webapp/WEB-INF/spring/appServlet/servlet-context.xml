@@ -65,6 +65,6 @@
 			<beans:value>true</beans:value>
 		</beans:constructor-arg>
 	</beans:bean>
-
+	
 	<context:component-scan base-package="by.htp.newsagent.controller, by.htp.newsagent.aspect" />
 </beans:beans>

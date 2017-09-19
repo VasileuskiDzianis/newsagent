@@ -164,6 +164,7 @@ p {
 }
 
 .details-title {
+	color: #424242;
 	vertical-align: top;
 	width: 150px;
 	display: inline-block;
@@ -178,7 +179,7 @@ p {
 
 .form-error-label {
 	vertical-align: top;
-	color: red;
+	color: #696969;
 	display: inline-block;
 }
 

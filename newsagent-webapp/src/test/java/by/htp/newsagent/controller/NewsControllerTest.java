@@ -45,8 +45,8 @@ import org.springframework.web.context.WebApplicationContext;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationModel;
-import by.htp.newsagent.model.NewsItemModel;
+import by.htp.newsagent.model.LocationWebModel;
+import by.htp.newsagent.model.NewsItemWebModel;
 import by.htp.newsagent.service.news.NewsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -97,7 +97,6 @@ public class NewsControllerTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-		
 		this.newsService = (NewsService) this.wac.getBean("newsServiceMock");
 
 		mockNews1 = new News();
@@ -130,15 +129,15 @@ public class NewsControllerTest {
 				.andExpect(view().name("news.view"))
 				.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 				.andExpect(model().attribute("locationModel",
-						allOf(Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_VIEW)),
-								Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+						allOf(Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_VIEW)),
+								Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
 				.andExpect(model().attribute("newsItemModel", 
 						allOf(
-								Matchers.<NewsItemModel>hasProperty("id", equalTo(NEWS_ID_2)),
-								Matchers.<NewsItemModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
-								Matchers.<NewsItemModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
-								Matchers.<NewsItemModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
-								Matchers.<NewsItemModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
+								Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_2)),
+								Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
+								Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
+								Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
+								Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
 								)));
 	}
 	
@@ -149,8 +148,8 @@ public class NewsControllerTest {
 		.andExpect(view().name("error"))
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
-				allOf(Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.ERROR)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+				allOf(Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.ERROR)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
 		.andExpect(model().attribute("errorMessage", 
 				anyOf(
 						equalTo("Код 400 Не верный запрос"),
@@ -200,8 +199,8 @@ public class NewsControllerTest {
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
 				allOf(
-						Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))));
+						Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))));
 	}
 
 	@Test
@@ -212,24 +211,24 @@ public class NewsControllerTest {
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
 				allOf(
-						Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_LIST)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
-		.andExpect(model().attribute("newsList", Matchers.<List<NewsItemModel>>hasSize(2)))
+						Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_LIST)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+		.andExpect(model().attribute("newsList", Matchers.<List<NewsItemWebModel>>hasSize(2)))
 		.andExpect(model().attribute("newsList", hasItem(
 				allOf(
-						Matchers.<NewsItemModel>hasProperty("id", equalTo(NEWS_ID_1)),
-						Matchers.<NewsItemModel>hasProperty("newsDate", equalTo(NEWS_DATE_1)),
-						Matchers.<NewsItemModel>hasProperty("title", equalTo(NEWS_TITLE_1)),
-						Matchers.<NewsItemModel>hasProperty("brief", equalTo(NEWS_BRIEF_1)),
-						Matchers.<NewsItemModel>hasProperty("content", equalTo(NEWS_CONTENT_1))
+						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_1)),
+						Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_1)),
+						Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_1)),
+						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_1)),
+						Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_1))
 						))))
 		.andExpect(model().attribute("newsList", hasItem(
 				allOf(
-						Matchers.<NewsItemModel>hasProperty("id", equalTo(NEWS_ID_2)),
-						Matchers.<NewsItemModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
-						Matchers.<NewsItemModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
-						Matchers.<NewsItemModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
-						Matchers.<NewsItemModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
+						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_2)),
+						Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
+						Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
+						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
+						Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
 						))));
 	}
 
@@ -240,8 +239,8 @@ public class NewsControllerTest {
 		.andExpect(view().name("error"))
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
-				allOf(Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.ERROR)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+				allOf(Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.ERROR)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
 		.andExpect(model().attribute("errorMessage", 
 				anyOf(
 						equalTo("Код 400 Не верный запрос"),
@@ -256,15 +255,15 @@ public class NewsControllerTest {
 		.andExpect(view().name("news.add"))
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
-				allOf(Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_EDIT)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+				allOf(Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_EDIT)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
 		.andExpect(model().attribute("newsItemModel", 
 				allOf(
-						Matchers.<NewsItemModel>hasProperty("id", equalTo(NEWS_ID_2)),
-						Matchers.<NewsItemModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
-						Matchers.<NewsItemModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
-						Matchers.<NewsItemModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
-						Matchers.<NewsItemModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
+						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_2)),
+						Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
+						Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
+						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
+						Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
 						)));
 	}
 	
@@ -275,15 +274,15 @@ public class NewsControllerTest {
 		.andExpect(view().name("news.add"))
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
-				allOf(Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
+				allOf(Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))))
 		.andExpect(model().attribute("newsItemModel", 
 				allOf(
-						Matchers.<NewsItemModel>hasProperty("id", equalTo(0)),
-						Matchers.<NewsItemModel>hasProperty("newsDate", notNullValue()),
-						Matchers.<NewsItemModel>hasProperty("title", nullValue()),
-						Matchers.<NewsItemModel>hasProperty("brief", nullValue()),
-						Matchers.<NewsItemModel>hasProperty("content", nullValue())
+						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(0)),
+						Matchers.<NewsItemWebModel>hasProperty("newsDate", notNullValue()),
+						Matchers.<NewsItemWebModel>hasProperty("title", nullValue()),
+						Matchers.<NewsItemWebModel>hasProperty("brief", nullValue()),
+						Matchers.<NewsItemWebModel>hasProperty("content", nullValue())
 						)));
 	}
 	

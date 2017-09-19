@@ -1,4 +1,4 @@
-package by.htp.newsagent.service;
+package by.htp.newsagent.service.validation.variables;
 
 import java.util.regex.Pattern;
 

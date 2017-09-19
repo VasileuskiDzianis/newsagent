@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationModel;
+import by.htp.newsagent.model.LocationWebModel;
 import by.htp.newsagent.service.news.NewsService;
 
 public class NewsControllerAdvancedTest extends NewsController {
@@ -111,7 +111,7 @@ public class NewsControllerAdvancedTest extends NewsController {
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel",
 				allOf(
-						Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
-						Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS)))));
+						Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.NEWS_ADD)),
+						Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS)))));
 	}
 }

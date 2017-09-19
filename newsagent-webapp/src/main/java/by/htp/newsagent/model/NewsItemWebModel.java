@@ -7,9 +7,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class NewsItemModel {
+import by.htp.newsagent.service.validation.date.DateRange;
+
+public class NewsItemWebModel {
 	private int id;
-	
+
+	@DateRange(min = "2017-01-01", max = "2100-12-31")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull(message = "can not be empty")
 	private Date newsDate;

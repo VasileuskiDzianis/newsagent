@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationModel;
-import by.htp.newsagent.model.NewsItemModel;
-import by.htp.newsagent.service.PathValidator;
+import by.htp.newsagent.model.LocationWebModel;
+import by.htp.newsagent.model.NewsItemWebModel;
 import by.htp.newsagent.service.news.NewsService;
+import by.htp.newsagent.service.validation.variables.PathValidator;
 
 @Controller
 @RequestMapping(value = "/news")
@@ -51,11 +51,11 @@ public class NewsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getNewsList(Model model, HttpServletRequest request) {
-		LocationModel locationModel = new LocationModel();
+		LocationWebModel locationModel = new LocationWebModel();
 		List<News> newsList = newsService.findByStatus(NewsStatus.ACTUAL);
-		List<NewsItemModel> newsModelList = new ArrayList<>();
+		List<NewsItemWebModel> newsModelList = new ArrayList<>();
 		for (News newsItem : newsList) {
-			NewsItemModel newsItemModel = new NewsItemModel();
+			NewsItemWebModel newsItemModel = new NewsItemWebModel();
 			newsItemModel.setId(newsItem.getId());
 			newsItemModel.setTitle(newsItem.getTitle());
 			newsItemModel.setBrief(newsItem.getBrief());
@@ -88,24 +88,21 @@ public class NewsController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveNews(Model model, @Valid @ModelAttribute("newsItemModel") NewsItemModel newsItemModel,
+	public String saveNews(Model model, @Valid @ModelAttribute("newsItemModel") NewsItemWebModel newsItemModel,
 			BindingResult bindingResult, HttpServletRequest request) {
-		LocationModel locationModel = new LocationModel();
-
+		LocationWebModel locationModel = new LocationWebModel();
+		
 		if (bindingResult.hasErrors()) {
-
 			if (newsItemModel.getId() > GENUINE_NEWS_ID) {
 				locationModel.setCurrentLocation(Location.NEWS_EDIT);
 			} else {
 				locationModel.setCurrentLocation(Location.NEWS_ADD);
 			}
-
 			locationModel.setPreviousLocation(Location.NEWS);
 			model.addAttribute("locationModel", locationModel);
 
 			return "news.add";
 		}
-
 		News newsItem = new News();
 		newsItem.setId(newsItemModel.getId());
 		newsItem.setTitle(newsItemModel.getTitle());
@@ -121,7 +118,7 @@ public class NewsController {
 
 	@RequestMapping(path = "/{rawNewsId}", method = RequestMethod.GET)
 	public String getNewsItem(Model model, @PathVariable String rawNewsId, Locale locale, HttpServletRequest request) {
-		LocationModel locationModel = new LocationModel();
+		LocationWebModel locationModel = new LocationWebModel();
 		int newsId = 0;
 
 		if (PathValidator.isPathVariableValid(rawNewsId)) {
@@ -137,7 +134,7 @@ public class NewsController {
 		}
 		News newsItem = newsService.findById(newsId);
 		if (newsItem != null) {
-			NewsItemModel newsItemModel = new NewsItemModel();
+			NewsItemWebModel newsItemModel = new NewsItemWebModel();
 			newsItemModel.setId(newsItem.getId());
 			newsItemModel.setTitle(newsItem.getTitle());
 			newsItemModel.setBrief(newsItem.getBrief());
@@ -159,7 +156,7 @@ public class NewsController {
 
 	@RequestMapping(path = "/{rawNewsId}/edit", method = RequestMethod.GET)
 	public String editNewsItem(Model model, @PathVariable String rawNewsId, Locale locale, HttpServletRequest request) {
-		LocationModel locationModel = new LocationModel();
+		LocationWebModel locationModel = new LocationWebModel();
 		
 		if (!PathValidator.isPathVariableValid(rawNewsId)) {
 			locationModel.setCurrentLocation(Location.ERROR);
@@ -172,7 +169,7 @@ public class NewsController {
 		}
 
 		News newsItem = newsService.findById(Integer.parseInt(rawNewsId));
-		NewsItemModel newsItemModel = new NewsItemModel();
+		NewsItemWebModel newsItemModel = new NewsItemWebModel();
 
 		if (newsItem != null) {
 			newsItemModel.setId(newsItem.getId());

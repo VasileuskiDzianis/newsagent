@@ -39,7 +39,7 @@ public class NewsServiceImpl implements NewsService {
 			throw new IllegalArgumentException("Argument can't be null");
 		}
 		if (!newsValidator.isNewsValid(news)) {
-			throw new NewsValidationException("News: not valid fields");
+			throw new NewsValidationException("News: are not valid fields");
 		}
 		news.setStatus(NewsStatus.ARCHIVED);
 		newsDao.saveNews(news);
@@ -61,7 +61,7 @@ public class NewsServiceImpl implements NewsService {
 			throw new IllegalArgumentException("Argument can't be null");
 		}
 		if (!newsValidator.isNewsValid(news)) {
-			throw new NewsValidationException("News: not valid fields");
+			throw new NewsValidationException("News: are not valid fields");
 		}
 		newsDao.saveNews(news);
 	}

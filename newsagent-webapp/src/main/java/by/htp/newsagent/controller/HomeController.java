@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationModel;
+import by.htp.newsagent.model.LocationWebModel;
 
 @Controller
 public class HomeController {
 	
 	@RequestMapping(value = {"/","/about","/home"}, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
-		LocationModel locationModel = new LocationModel();
+		LocationWebModel locationModel = new LocationWebModel();
 		locationModel.setCurrentLocation(Location.ABOUT);
 		locationModel.setPreviousLocation(Location.NEWS);
 		

@@ -69,7 +69,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>newsagent</finalName>
-		<directory>../target</directory>
+    <finalName>newsagent</finalName>
 	</build>
 </project>

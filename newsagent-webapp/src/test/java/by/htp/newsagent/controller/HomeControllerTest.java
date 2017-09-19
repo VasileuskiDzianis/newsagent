@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationModel;
+import by.htp.newsagent.model.LocationWebModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("test-servlet-context.xml")
@@ -45,8 +45,8 @@ public class HomeControllerTest extends HomeController {
         .andExpect(view().name("about"))
         .andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel", allOf(
-				Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.ABOUT)), 
-				Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS))))
+				Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.ABOUT)), 
+				Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS))))
 		);
 		
 		this.mockMvc.perform(get("/about"))
@@ -54,8 +54,8 @@ public class HomeControllerTest extends HomeController {
 		.andExpect(view().name("about"))
 		.andExpect(forwardedUrl("/WEB-INF/layouts/newsagent.jsp"))
 		.andExpect(model().attribute("locationModel", allOf(
-				Matchers.<LocationModel>hasProperty("currentLocation", equalTo(Location.ABOUT)), 
-				Matchers.<LocationModel>hasProperty("previousLocation", equalTo(Location.NEWS))))
+				Matchers.<LocationWebModel>hasProperty("currentLocation", equalTo(Location.ABOUT)), 
+				Matchers.<LocationWebModel>hasProperty("previousLocation", equalTo(Location.NEWS))))
 				);
 	}
 }

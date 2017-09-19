@@ -1,6 +1,6 @@
 package by.htp.newsagent.model;
 
-public class LocationModel {
+public class LocationWebModel {
 	private Location currentLocation;
 	private Location previousLocation;
 

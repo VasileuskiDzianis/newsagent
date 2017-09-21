@@ -212,7 +212,7 @@
 				<version>2.6</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<outputDirectory>/home/dzianis/htp_final_proj/newsagent/target</outputDirectory>
+					<outputDirectory>target</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

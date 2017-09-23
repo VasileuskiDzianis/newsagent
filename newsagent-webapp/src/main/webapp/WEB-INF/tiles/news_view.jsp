@@ -9,7 +9,7 @@
 	
 	<div class="details-item">
 		<div class="details-title"><spring:message code="label.newsItemTitle" /></div>
-		<div class="details-content">${newsItemModel.title}</div>
+		<div class="details-content"><c:out value="${newsItemModel.title}"/></div>
 	</div>
 	
 	<div class="details-item">
@@ -19,12 +19,12 @@
 	
 	<div class="details-item">
 		<div class="details-title"><spring:message code="label.newsItemBrief" /></div>
-		<div class="details-content">${newsItemModel.brief}</div>
+		<div class="details-content"><c:out value="${newsItemModel.brief}"/></div>
 	</div>
 	
 	<div class="details-item">
 		<div class="details-title"><spring:message code="label.newsItemContent" /></div>
-		<div class="details-content">${newsItemModel.content}</div>
+		<div class="details-content"><c:out value="${newsItemModel.content}"/></div>
 	</div>
 	
 	<div id="submit-container">

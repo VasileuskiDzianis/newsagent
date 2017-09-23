@@ -10,8 +10,8 @@
 	<c:forEach var="newsItem" items="${newsList}">
 		<div class="news-item-container">
 			<div class="news-item-date"><fmt:formatDate value="${newsItem.newsDate}" pattern="dd/MM/yyyy"/></div>
-			<div class="news-item-title">${newsItem.title}</div>
-			<div class="news-item-brief">${newsItem.brief}</div>
+			<div class="news-item-title"><c:out value="${newsItem.title}"/></div>
+			<div class="news-item-brief"><c:out value="${newsItem.brief}"/></div>
 			<div class="news-item-actions">
 				<a class="action-item" href="<c:url value="/news/${newsItem.id}"/>"><spring:message code="link.viewNewsItem" /></a> 
 				<a class="action-item" href="<c:url value="/news/${newsItem.id}/edit"/>"><spring:message code="link.editNewsItem" /></a> 

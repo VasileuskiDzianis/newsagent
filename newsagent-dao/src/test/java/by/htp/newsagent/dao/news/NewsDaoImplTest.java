@@ -22,6 +22,7 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 	private static final String EXPECTED_NEWS_TITLE = "Short title 3";
 	private static final String EXPECTED_NEWS_BRIEF = "Short brief 3";
 	private static final String EXPECTED_NEWS_CONTENT = "Short content 3";
+	private static final String EXPECTED_NEWS_DATE = "2017-09-03";
 	private static final NewsStatus EXPECTED_NEWS_STATUS = NewsStatus.ACTUAL;
 	private static final List<Integer> ACTUAL_NEWS_IDS = Arrays.asList(1, 2, 3, 5, 6, 7, 8);
 	private static final Integer ARCHIVED_NEWS_ID = 4;
@@ -33,6 +34,13 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 	private static final NewsStatus GIVEN_NEWS_STATUS = NewsStatus.ACTUAL;
 
 	private static final int ILLEGAL_ID = 0;
+	
+	private static final int NEWS_FOR_STATUS_CHANGING_ID = 3;
+	private static final NewsStatus NEWS_FOR_STATUS_CHANGING_OLD_STATUS = NewsStatus.ACTUAL;
+	private static final NewsStatus NEWS_FOR_STATUS_CHANGING_NEW_STATUS = NewsStatus.ARCHIVED;
+	
+	private static final String CONTEXT_FILE = "test_spring_context.xml";
+	private static final String DATE_FORMAT = "yyyy-MM-dd";
 
 	private Date expectedNewsDate;
 	private NewsDao newsDao;
@@ -40,11 +48,11 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 
 	@Before
 	public void setUp() throws ParseException {
-		context = new ClassPathXmlApplicationContext("test_spring_context.xml");
+		context = new ClassPathXmlApplicationContext(CONTEXT_FILE);
 		newsDao = (NewsDao) context.getBean("newsDaoImpl");
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		expectedNewsDate = dateFormat.parse("2017-09-03");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		expectedNewsDate = dateFormat.parse(EXPECTED_NEWS_DATE);
 	}
 
 	@Test
@@ -106,6 +114,21 @@ public class NewsDaoImplTest extends NewsDaoImpl {
 		newsDao.deleteNews(storedNews);
 
 		assertNull(newsDao.findById(storedNewsId));
+	}
+	
+	@Test
+	public void changeNewsStatus() {
+		News gotNews = newsDao.findById(NEWS_FOR_STATUS_CHANGING_ID);
+		
+		assertTrue(gotNews.getStatus().equals(NEWS_FOR_STATUS_CHANGING_OLD_STATUS));
+		
+		newsDao.changeNewsStatus(NEWS_FOR_STATUS_CHANGING_ID, NEWS_FOR_STATUS_CHANGING_NEW_STATUS);
+		
+		gotNews = newsDao.findById(NEWS_FOR_STATUS_CHANGING_ID);
+		
+		assertTrue(gotNews.getStatus().equals(NEWS_FOR_STATUS_CHANGING_NEW_STATUS));
+		
+		newsDao.changeNewsStatus(NEWS_FOR_STATUS_CHANGING_ID, NEWS_FOR_STATUS_CHANGING_OLD_STATUS);
 	}
 
 	@After

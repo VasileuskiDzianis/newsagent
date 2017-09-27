@@ -56,7 +56,7 @@ public class NewsValidatorServiceImpl implements NewsValidatorService {
 	
 	private boolean isLengthNotInRange(String text, int min, int max) {
 		
-		return (text.length() < min || text.length() > max);
+		return (text.trim().length() < min || text.trim().length() > max);
 	}
 	
 	private boolean isDateNotInRange(Date date, Date minDate, Date maxDate) {

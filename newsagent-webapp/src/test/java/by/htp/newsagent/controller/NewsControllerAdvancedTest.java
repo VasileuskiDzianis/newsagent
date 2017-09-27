@@ -24,10 +24,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import by.htp.newsagent.controller.form.Location;
+import by.htp.newsagent.controller.form.LocationWebModel;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
-import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationWebModel;
 import by.htp.newsagent.service.news.NewsService;
 
 public class NewsControllerAdvancedTest extends NewsController {
@@ -92,7 +92,6 @@ public class NewsControllerAdvancedTest extends NewsController {
 		.andExpect(redirectedUrl("/news"));
 		
 		verify(newsService).archiveSeveralNews(any());
-		verify(newsService, times(2)).findById(anyInt());
 	}
 	
 	//BindingResult doesn't have errors with hibernate-validator 5.4.1.Final

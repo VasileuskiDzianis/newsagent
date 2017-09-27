@@ -16,9 +16,9 @@ public class NewsTest {
 	private static final Date GIVEN_NEWS_DATE = new Date();
 	private static final NewsStatus GIVEN_NEWS_STATUS = NewsStatus.ACTUAL;
 	
-	News givenNewsOne;
-	News givenNewsTwo;
-	News givenNewsThree;
+	private News givenNewsOne;
+	private News givenNewsTwo;
+	private News givenNewsThree;
 
 	@Before
 	public void setUp() {
@@ -54,6 +54,5 @@ public class NewsTest {
 		assertTrue(givenNewsOne.hashCode() == givenNewsTwo.hashCode());
 		assertFalse(givenNewsOne.equals(givenNewsThree));
 		assertFalse(givenNewsOne.hashCode() == givenNewsThree.hashCode());
-		
 	}
 }

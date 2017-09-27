@@ -14,10 +14,10 @@ import by.htp.newsagent.service.news.validator.NewsValidatorService;
 @Service
 public class NewsServiceImpl implements NewsService {
 	@Autowired
-	NewsDao newsDao;
+	private NewsDao newsDao;
 
 	@Autowired
-	NewsValidatorService newsValidator;
+	private NewsValidatorService newsValidator;
 
 	@Override
 	public News findById(int id) {
@@ -34,24 +34,17 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public void archiveOnePieceOfNews(News news) {
-		if (news == null) {
-			throw new IllegalArgumentException("Argument can't be null");
-		}
-		if (!newsValidator.isNewsValid(news)) {
-			throw new NewsValidationException("News: are not valid fields");
-		}
-		news.setStatus(NewsStatus.ARCHIVED);
-		newsDao.saveNews(news);
+	public void archiveOnePieceOfNews(int id) {
+		newsDao.changeNewsStatus(id, NewsStatus.ARCHIVED);
 	}
 
 	@Override
-	public void archiveSeveralNews(List<News> news) {
+	public void archiveSeveralNews(int[] news) {
 		if (news == null) {
 			throw new IllegalArgumentException("Argument can't be null");
 		}
-		for (News newsItem : news) {
-			archiveOnePieceOfNews(newsItem);
+		for (int id : news) {
+			archiveOnePieceOfNews(id);
 		}
 	}
 

@@ -14,4 +14,6 @@ public interface NewsDao {
 	void saveNews(News news);
 	
 	void deleteNews(News news);
+
+	void changeNewsStatus(int id, NewsStatus stat);
 }

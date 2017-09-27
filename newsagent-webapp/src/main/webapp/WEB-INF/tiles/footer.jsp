@@ -4,6 +4,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div id="footer-container">
 	<div id="footer-content">
-			<spring:message code="label.footerMessage" />
+			<spring:message code="messages.label.footerMessage" />
 	</div>
 </div>

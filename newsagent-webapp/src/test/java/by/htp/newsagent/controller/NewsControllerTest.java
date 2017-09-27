@@ -42,11 +42,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import by.htp.newsagent.controller.form.Location;
+import by.htp.newsagent.controller.form.LocationWebModel;
+import by.htp.newsagent.controller.form.NewsItemWebModel;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
-import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationWebModel;
-import by.htp.newsagent.model.NewsItemWebModel;
 import by.htp.newsagent.service.news.NewsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -219,16 +219,14 @@ public class NewsControllerTest {
 						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_1)),
 						Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_1)),
 						Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_1)),
-						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_1)),
-						Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_1))
+						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_1))
 						))))
 		.andExpect(model().attribute("newsList", hasItem(
 				allOf(
 						Matchers.<NewsItemWebModel>hasProperty("id", equalTo(NEWS_ID_2)),
 						Matchers.<NewsItemWebModel>hasProperty("newsDate", equalTo(NEWS_DATE_2)),
 						Matchers.<NewsItemWebModel>hasProperty("title", equalTo(NEWS_TITLE_2)),
-						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_2)),
-						Matchers.<NewsItemWebModel>hasProperty("content", equalTo(NEWS_CONTENT_2))
+						Matchers.<NewsItemWebModel>hasProperty("brief", equalTo(NEWS_BRIEF_2))
 						))));
 	}
 

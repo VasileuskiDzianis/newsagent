@@ -7,11 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationWebModel;
+import by.htp.newsagent.controller.form.Location;
+import by.htp.newsagent.controller.form.LocationWebModel;
 
 @Controller
 public class HomeController {
+	private static final String PAGE_ABOUT_ALIAS = "about";
 	
 	@RequestMapping(value = {"/","/about","/home"}, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
@@ -19,8 +20,8 @@ public class HomeController {
 		locationModel.setCurrentLocation(Location.ABOUT);
 		locationModel.setPreviousLocation(Location.NEWS);
 		
-		model.addAttribute("locationModel", locationModel);
+		model.addAttribute(LocationWebModel.ALIAS, locationModel);
 		
-		return "about";
+		return PAGE_ABOUT_ALIAS;
 	}
 }

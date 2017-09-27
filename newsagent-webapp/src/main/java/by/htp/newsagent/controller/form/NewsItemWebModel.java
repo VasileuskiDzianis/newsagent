@@ -1,4 +1,4 @@
-package by.htp.newsagent.model;
+package by.htp.newsagent.controller.form;
 
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import by.htp.newsagent.service.validation.date.DateRange;
 
 public class NewsItemWebModel {
+	public static final String ALIAS = "newsItemModel";
+	
 	private int id;
 
 	@DateRange(min = "2017-01-01", max = "2100-12-31")

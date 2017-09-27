@@ -1,6 +1,8 @@
-package by.htp.newsagent.model;
+package by.htp.newsagent.controller.form;
 
 public class LocationWebModel {
+	public static final String ALIAS = "locationModel";
+	
 	private Location currentLocation;
 	private Location previousLocation;
 

@@ -9,32 +9,32 @@
 <form:form action="${pageContext.request.contextPath}/news" modelAttribute="newsItemModel" method="POST">
 <form:hidden path="id"/>
 <div class="details-item">
-		<div class="details-title"><spring:message code="label.newsItemTitle" /></div>
+		<div class="details-title"><spring:message code="messages.label.newsItemTitle" /></div>
 		<form:input path="title" cssClass="details-content" size="90"/>
 		<form:errors path="title" cssClass="form-error-label" element="div" />
 	</div>
 	
 	<div class="details-item">
-		<div class="details-title"><spring:message code="label.newsItemDate" /></div>
+		<div class="details-title"><spring:message code="messages.label.newsItemDate" /></div>
 		<form:input path="newsDate" cssClass="details-content" size="15" id="datepicker"/>
 		<form:errors path="newsDate" cssClass="form-error-label" element="div"/>
 	</div>
 	
 	<div class="details-item">
-		<div class="details-title"><spring:message code="label.newsItemBrief" /></div>
+		<div class="details-title"><spring:message code="messages.label.newsItemBrief" /></div>
 		<form:textarea path="brief" cssClass="details-content" cols="80" rows="6"/>
 		<form:errors path="brief" cssClass="form-error-label" element="div" />
 	</div>
 	
 	<div class="details-item">
-		<div class="details-title"><spring:message code="label.newsItemContent" /></div>
+		<div class="details-title"><spring:message code="messages.label.newsItemContent" /></div>
 		<form:textarea path="content" cssClass="details-content" cols="80" rows="10"/>
 		<form:errors path="content" cssClass="form-error-label" element="div"/>
 	</div>
 	
 	<div id="submit-container">
-		<a href="javascript:history.back()" class="button"><spring:message code="label.cancelButton" /></a>
-		<input type="submit" value="<spring:message code="label.saveButton" />" class="button"/>
+		<a href="javascript:history.back()" class="button"><spring:message code="messages.label.cancelButton" /></a>
+		<input type="submit" value="<spring:message code="messages.label.saveButton" />" class="button"/>
 	</div>
 </form:form>	
 </div>

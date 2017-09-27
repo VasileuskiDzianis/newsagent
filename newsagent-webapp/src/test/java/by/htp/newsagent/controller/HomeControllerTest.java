@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import by.htp.newsagent.model.Location;
-import by.htp.newsagent.model.LocationWebModel;
+import by.htp.newsagent.controller.form.Location;
+import by.htp.newsagent.controller.form.LocationWebModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("test-servlet-context.xml")

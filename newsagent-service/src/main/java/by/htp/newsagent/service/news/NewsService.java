@@ -19,8 +19,8 @@ public interface NewsService {
 	void saveNews(News news);
 
 	@Transactional
-	void archiveOnePieceOfNews(News news);
+	void archiveOnePieceOfNews(int id);
 
 	@Transactional
-	void archiveSeveralNews(List<News> news);
+	void archiveSeveralNews(int[] news);
 }

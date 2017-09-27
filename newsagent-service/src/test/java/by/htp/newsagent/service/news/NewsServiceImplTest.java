@@ -11,11 +11,6 @@ public class NewsServiceImplTest extends NewsServiceImpl {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testArchiveOnePieceOfNews() {
-		newsService.archiveOnePieceOfNews(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void testArchiveSeveralNews() {
 		newsService.archiveSeveralNews(null);
 	}

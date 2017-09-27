@@ -52,6 +52,7 @@ function showPrompt(text) {
 }
 
 function confirmDeletion(newsId, message) {
+	message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	if (newsId != 0) {
 		var hiddenField = document.getElementById("deleting_news");
 		hiddenField.setAttribute("value", newsId);

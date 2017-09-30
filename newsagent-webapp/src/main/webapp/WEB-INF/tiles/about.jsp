@@ -1,19 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page session ="false" %>
+<%@ page session="false"%>
 <div id="about-container">
 	<h1>About</h1>
+	<p>Web application for adding/editing/updating articles. Final
+		project at IT-Academy course: Development technologies for enterprise
+		solutions on Java.</p>
+	<h2>Features:</h2>
+	<ul>
+		<li>Articles adding</li>
+		<li>Articles edition</li>
+		<li>Single article deletion</li>
+		<li>Group of articles deletion</li>
+		<li>Title, Brief, Content - length validation</li>
+		<li>Date - range validation</li>
+		<li>Two languages interface</li>
+	</ul>	
 	<h2>Used technologies:</h2>
-		<ul>
-			<li>Java</li>
-			<li>Spring (core, mvc, aop)</li>
-			<li>Hibernate, MySQL</li>
-			<li>JUnit, Mockito</li>
-			<li>Log4j</li>
-			<li>Apache tiles</li>
-			<li>JSP, JSTL</li>
-			<li>JavaScript, JQuery, HTML, CSS</li>
-		</ul>
+	<ul>
+		<li>Java</li>
+		<li>Spring (core, mvc, aop)</li>
+		<li>Hibernate, MySQL</li>
+		<li>JUnit, Mockito</li>
+		<li>Log4j</li>
+		<li>Apache tiles</li>
+		<li>JSP, JSTL</li>
+		<li>JavaScript, JQuery, HTML, CSS</li>
+	</ul>
 	<h2>Next pointless text is just for place filling</h2>
 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
 		commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
@@ -218,7 +231,6 @@
 		Curabitur a felis in nunc fringilla tristique. Morbi mattis
 		ullamcorper velit. Phasellus gravida semper nisi. Nullam vel sem.
 		Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec,
-		quam. Sed hendrerit. Morbi ac felis.
-		</p>
+		quam. Sed hendrerit. Morbi ac felis.</p>
 
 </div>

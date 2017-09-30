@@ -1,9 +1,13 @@
-package by.htp.newsagent.service.validation.variable;
+package by.htp.newsagent.validator.path;
 
 import java.util.regex.Pattern;
 
 public final class PathValidator {
 	private static final String PATH_VARIABLE_PATTERN = "\\d{1,}";
+	
+	private PathValidator() {
+		
+	}
 
 	public static boolean isPathVariableValid(String pathVariable) {
 		if (pathVariable == null) {

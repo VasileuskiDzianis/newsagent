@@ -1,4 +1,4 @@
-package by.htp.newsagent.service.validation.date;
+package by.htp.newsagent.validator.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

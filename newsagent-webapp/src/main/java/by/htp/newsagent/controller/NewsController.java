@@ -28,7 +28,7 @@ import by.htp.newsagent.controller.form.NewsItemWebModel;
 import by.htp.newsagent.domain.news.News;
 import by.htp.newsagent.domain.news.NewsStatus;
 import by.htp.newsagent.service.news.NewsService;
-import by.htp.newsagent.service.validation.variable.PathValidator;
+import by.htp.newsagent.validator.path.PathValidator;
 
 @Controller
 @RequestMapping(value = "/news")
@@ -113,7 +113,7 @@ public class NewsController {
 	@RequestMapping(path = "/{rawNewsId}", method = RequestMethod.GET)
 	public String getNewsItem(Model model, @PathVariable String rawNewsId, Locale locale, HttpServletRequest request) {
 		LocationWebModel locationModel = new LocationWebModel();
-		int newsId = 0;
+		int newsId = GENUINE_NEWS_ID;
 
 		if (PathValidator.isPathVariableValid(rawNewsId)) {
 			newsId = Integer.parseInt(rawNewsId);

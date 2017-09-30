@@ -1,4 +1,4 @@
-package by.htp.newsagent.service.validation.date;
+package by.htp.newsagent.validator.date;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;

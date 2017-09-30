@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import by.htp.newsagent.service.validation.date.DateRange;
+import by.htp.newsagent.validator.date.DateRange;
 
 public class NewsItemWebModel {
 	public static final String ALIAS = "newsItemModel";

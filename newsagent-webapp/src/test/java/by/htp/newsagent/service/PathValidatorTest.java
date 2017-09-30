@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import by.htp.newsagent.service.validation.variable.PathValidator;
+import by.htp.newsagent.validator.path.PathValidator;
 
 @RunWith(value = Parameterized.class)
 public class PathValidatorTest {
